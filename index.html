@@ -1,158 +1,103 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Interactive Contact Form</title>
-
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Hive Game Group - Join</title>
   <style>
     body {
-      background: #f6f6f6;
-      font-family: Arial;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: #f7f7fb;
+      color: #222;
+      margin: 0;
+      padding: 32px;
       display: flex;
       justify-content: center;
-      padding: 50px;
     }
-
-    .container {
-      background: white;
-      padding: 20px;
-      width: 350px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-
-    label {
-      font-weight: bold;
-    }
-
-    input, textarea {
+    .card {
+      max-width: 760px;
       width: 100%;
-      padding: 10px;
-      border: 2px solid #ccc;
-      border-radius: 5px;
-      margin-bottom: 5px;
-      outline: none;
-      font-size: 15px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 8px 30px rgba(20,20,50,0.06);
+      padding: 28px;
+      box-sizing: border-box;
     }
-
-    input.valid, textarea.valid {
-      border-color: green;
+    h1 {
+      margin: 0 0 6px 0;
+      font-size: 22px;
+      letter-spacing: -0.3px;
     }
-
-    input.invalid, textarea.invalid {
-      border-color: red;
+    p.lead {
+      margin: 6px 0 18px 0;
+      color: #444;
     }
-
-    .error {
-      color: red;
-      font-size: 12px;
-      margin-bottom: 10px;
+    ul.skills {
+      margin: 0 0 18px 0;
+      padding-left: 20px;
     }
-
-    button {
-      width: 100%;
-      padding: 12px;
-      background: blue;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 16px;
+    ul.roles {
+      margin: 0 0 22px 0;
+      padding-left: 20px;
     }
-
-    #formResult {
-      margin-top: 10px;
-      font-weight: bold;
-      text-align: center;
+    li {
+      margin: 8px 0;
+    }
+    .apply {
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+    .btn {
+      display:inline-block;
+      padding:10px 16px;
+      background:#0b76ff;
+      color:#fff;
+      text-decoration:none;
+      border-radius:8px;
+      font-weight:600;
+    }
+    .muted { color:#666; font-size:13px; }
+    .note {
+      margin-top:16px;
+      padding:12px;
+      background:#f1f6ff;
+      border-radius:8px;
+      font-size:13px;
+      color:#264c8f;
     }
   </style>
 </head>
 <body>
+  <div class="card" role="main">
+    <h1>Welcome to Hive Game Group</h1>
+    <p class="lead">
+      Through WhatsApp we will link software engineers to each other. I am looking for people with the skills listed below.
+    </p>
 
-<div class="container">
-  <h2>Contact Us</h2>
+    <h2 style="font-size:16px;margin-top:0;">Interested developer roles (optional)</h2>
+    <ul class="skills">
+      <li>Web developer (optional)</li>
+      <li>App developer (optional)</li>
+      <li>Game developer</li>
+    </ul>
 
-  <form id="contactForm">
-    <label>Name</label>
-    <input type="text" id="name" placeholder="Enter your name">
-    <small class="error" id="nameError"></small>
+    <h2 style="font-size:16px;margin-top:0;">Under game and app developer we are looking for:</h2>
+    <ul class="roles">
+      <li>Researcher — 20% (1 person)</li>
+      <li>Voice artist — 18% (1 person)</li>
+      <li>Graphic designer — 20% (1 person)</li>
+      <li>Game tester — 15% (1 person)</li>
+    </ul>
 
-    <label>Email</label>
-    <input type="email" id="email" placeholder="Enter your email">
-    <small class="error" id="emailError"></small>
+    <div class="apply" aria-hidden="false">
+      <a class="btn" href="mailto:example@example.com?subject=Apply%20to%20Hive%20Game%20Group">Apply</a>
+      <span class="muted">Click the button to apply (opens your email). Replace the email address with your contact link.</span>
+    </div>
 
-    <label>Message</label>
-    <textarea id="message" placeholder="Enter your message"></textarea>
-    <small class="error" id="messageError"></small>
-
-    <button id="submitBtn">Submit</button>
-    <p id="formResult"></p>
-  </form>
-</div>
-
-<script>
-  // Name validation (event: input)
-  document.getElementById("name").addEventListener("input", function () {
-    const name = this.value.trim();
-    if (name.length < 3) {
-      this.classList.add("invalid");
-      this.classList.remove("valid");
-      document.getElementById("nameError").textContent =
-        "Name must be at least 3 characters";
-    } else {
-      this.classList.add("valid");
-      this.classList.remove("invalid");
-      document.getElementById("nameError").textContent = "";
-    }
-  });
-
-  // Email validation (event: blur)
-  document.getElementById("email").addEventListener("blur", function () {
-    const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
-    if (!emailPattern.test(this.value)) {
-      this.classList.add("invalid");
-      this.classList.remove("valid");
-      document.getElementById("emailError").textContent =
-        "Enter a valid email address";
-    } else {
-      this.classList.add("valid");
-      this.classList.remove("invalid");
-      document.getElementById("emailError").textContent = "";
-    }
-  });
-
-  // Message validation (event: input)
-  document.getElementById("message").addEventListener("input", function () {
-    if (this.value.length < 10) {
-      this.classList.add("invalid");
-      this.classList.remove("valid");
-      document.getElementById("messageError").textContent =
-        "Message must be at least 10 characters";
-    } else {
-      this.classList.add("valid");
-      this.classList.remove("invalid");
-      document.getElementById("messageError").textContent = "";
-    }
-  });
-
-  // Submit button (event: click)
-  document.getElementById("submitBtn").addEventListener("click", function (e) {
-    e.preventDefault(); // prevent real form submission
-
-    const nameValid = document.getElementById("name").classList.contains("valid");
-    const emailValid = document.getElementById("email").classList.contains("valid");
-    const messageValid = document.getElementById("message").classList.contains("valid");
-
-    if (nameValid && emailValid && messageValid) {
-      document.getElementById("formResult").style.color = "green";
-      document.getElementById("formResult").textContent = "Form submitted successfully!";
-    } else {
-      document.getElementById("formResult").style.color = "red";
-      document.getElementById("formResult").textContent = "Please fix the errors.";
-    }
-  });
-</script>
-
+    <div class="note">
+      If you want to apply but prefer another way of contacting, replace the mailto link above with a link to a WhatsApp group invite or an application form.
+    </div>
+  </div>
 </body>
 </html>
